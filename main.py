@@ -1,16 +1,32 @@
-# This is a sample Python script.
+import requests
+import time
 
-# Press ⇧F10 to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+# Target URL
+url = "https://geekssort.com/"
 
+# Optional: headers
+headers = {
+    "User-Agent": "LoadTester/1.0"
+}
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+# Optional: delay between hits in seconds
+delay = 0.1
 
+# Counter
+count = 0
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+try:
+    while True:
+        response = requests.get(url, headers=headers, timeout=5)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+        if response.status_code == 200:
+            count += 1
+            print(f"[{count}] Success: {response.status_code}")
+        else:
+            print(f"[{count}] Failed with status code: {response.status_code}")
+            break
+
+        time.sleep(delay)
+
+except requests.exceptions.RequestException as e:
+    print(f"[{count}] Request failed: {e}")
