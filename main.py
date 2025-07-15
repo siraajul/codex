@@ -15,7 +15,7 @@ delay = 0.1
 # Counter
 count = 0
 
-try:
+try:sd
     while True:
         response = requests.get(url, headers=headers, timeout=5)
 
